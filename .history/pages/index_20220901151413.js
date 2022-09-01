@@ -18,6 +18,7 @@ export default function Home() {
 
       {/* Feed */}
       <Feed/>
+
       {/* Widgets */}
       
       {/* Modal */}

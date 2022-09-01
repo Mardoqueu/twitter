@@ -17,7 +17,7 @@ export default function Home() {
       <Sidebar />
 
       {/* Feed */}
-      <Feed/>
+
       {/* Widgets */}
       
       {/* Modal */}
