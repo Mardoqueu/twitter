@@ -32,10 +32,10 @@ export default function Home({newsResults}) {
 
 //https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
 
-export async function getServerSideProps(){
+export async function getServerSidePropos(){
   const newsResults = await fetch (
-    "https://saurav.tech/NewsAPI/top-headlines/category/business/us.json"
-    ).then((res) => res.json());
+    "https://saurav.tech/NewsAPI/top-headlines/category/business/us.json")
+  .then((res) => res.json());
   return {
     props: {
       newsResults,

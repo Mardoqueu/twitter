@@ -20,7 +20,7 @@ export default function Home({newsResults}) {
       {/* Feed */}
       <Feed/>
       {/* Widgets */}
-      <Widgets newsResults={newsResults.articles} />
+      <Widgets/>
       {/* Modal */}
 
     </main>
@@ -32,13 +32,12 @@ export default function Home({newsResults}) {
 
 //https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
 
-export async function getServerSideProps(){
-  const newsResults = await fetch (
-    "https://saurav.tech/NewsAPI/top-headlines/category/business/us.json"
-    ).then((res) => res.json());
+export async function getServerSidePropos(){
+  const newsResults = await fetch ("https://saurav.tech/NewsAPI/top-headlines/category/business/us.json")
+  .then((res)=>res.json());
   return {
     props: {
-      newsResults,
+      newsResults
     },
-  };
+  }
 }

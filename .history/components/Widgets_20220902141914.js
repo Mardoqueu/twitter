@@ -3,9 +3,7 @@ import { useState } from "react";
 import News from "./News";
 
 export default function Widgets({newsResults}) {
-
-{/*variable to show more news each time the user click on show more */}
-const [articlNum, setArticleNum] = useState(5);
+    cosnt [articlNum, setArticleNum] = useState(1)
   return (
     <div className="xl:w-[600px] hidden lg:inline ml-8 space-y-5">
         <div className="w-[90%] xl:w[75%] sticky top-0 bg-white py-1.5 z-50">            
@@ -20,8 +18,7 @@ const [articlNum, setArticleNum] = useState(5);
             {newsResults.slice(0,articlNum).map((article)=> (
             <News key={article.title} article={article}/>
         ))}
-        {/*Show more 3 news each time click on show more */}
-        <button onClick={() => setArticleNum(articlNum + 3)} className="text-blue-300 pl-4 pb-3 hover:text-blue-400">Show more</button>
+        <button className="text-blue-300 pl-4 pb-3 hover:text-blue-400">Show more</button>
         </div>
 
 

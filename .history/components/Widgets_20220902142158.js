@@ -4,7 +4,6 @@ import News from "./News";
 
 export default function Widgets({newsResults}) {
 
-{/*variable to show more news each time the user click on show more */}
 const [articlNum, setArticleNum] = useState(5);
   return (
     <div className="xl:w-[600px] hidden lg:inline ml-8 space-y-5">
