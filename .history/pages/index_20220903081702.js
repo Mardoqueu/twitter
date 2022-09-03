@@ -4,7 +4,7 @@ import Feed from '../components/Feed';
 import Widgets from "../components/Widgets";
 
 
-export default function Home({newsResults, randomUserResults}) {
+export default function Home({newsResults}) {
   return (
     <div >
       <Head>
@@ -20,7 +20,7 @@ export default function Home({newsResults, randomUserResults}) {
       {/* Feed */}
       <Feed/>
       {/* Widgets */}
-      <Widgets newsResults={newsResults.articles}  randomUserResults={randomUserResults.results}/>
+      <Widgets newsResults={newsResults.articles} />
       {/* Modal */}
 
     </main>
@@ -39,13 +39,11 @@ export async function getServerSideProps(){
 
     //Who to follow section
 
-    const randomUserResults = await fetch("https://randomuser.me/api/?results=30&inc=name,login,picture"
-    ).then((res) => res.json());
+    const randomUserResults = await fetch("https://randomuser.me/api/?results=30&inc=name,login,picture").then((res) => res.json());
 
   return {
     props: {
       newsResults,
-      randomUserResults,
     },
   };
 }
