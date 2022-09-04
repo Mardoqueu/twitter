@@ -12,6 +12,6 @@ export default NextAuth({
   ],
 
   pages:{
-    signin: "/auth/signin"
+    signin: "/auth/singin"
   }
 })
