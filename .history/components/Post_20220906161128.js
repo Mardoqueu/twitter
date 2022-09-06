@@ -4,9 +4,8 @@ import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firesto
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import {HeartIcon as HeartIconFilled} from "@heroicons/react/solid"
-import { deleteObject, ref } from "firebase/storage";
 export default function Post({post}) {
     const { data: session } = useSession();
     const [likes, setLikes] = useState([]);
@@ -44,15 +43,6 @@ export default function Post({post}) {
         }
       }
 
-      {/* delete functionality */}
-      async function deletePost() {
-        if (window.confirm("Are you sure you want to delete this post?")) {
-          deleteDoc(doc(db, "posts", post.id));
-          if(post.data().image){
-            deleteObject(ref(storage, `posts/${post.id}/image`));
-          }
-        }
-      }
   return (
     <div className="flex p-3 cursor-pointer border-b border-gray-200">
         {/* user image */}

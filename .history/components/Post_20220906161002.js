@@ -4,9 +4,8 @@ import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firesto
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import {HeartIcon as HeartIconFilled} from "@heroicons/react/solid"
-import { deleteObject, ref } from "firebase/storage";
 export default function Post({post}) {
     const { data: session } = useSession();
     const [likes, setLikes] = useState([]);
@@ -44,15 +43,6 @@ export default function Post({post}) {
         }
       }
 
-      {/* delete functionality */}
-      async function deletePost() {
-        if (window.confirm("Are you sure you want to delete this post?")) {
-          deleteDoc(doc(db, "posts", post.id));
-          if(post.data().image){
-            deleteObject(ref(storage, `posts/${post.id}/image`));
-          }
-        }
-      }
   return (
     <div className="flex p-3 cursor-pointer border-b border-gray-200">
         {/* user image */}
@@ -91,12 +81,10 @@ export default function Post({post}) {
                 <ChatIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
                 
             {/* Check if the user is the owner of the post */}
-            {session?.user.uid === post?.data().id && (
-            <TrashIcon
-              onClick={deletePost}
-              className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
-            />
-          )}
+                
+                {session?.user.iud == post?.data().id && (
+                      <TrashIcon className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"/>
+                )}
                 
                 {/*If there's any like, the heart will be filled, otherise it will be empty*/}
             <div className="flex items-center">
