@@ -1,9 +1,8 @@
 import { SparklesIcon } from '@heroicons/react/outline'
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import Input from '../components/Input';
-
+import { db } from '../firebase';
 import Post from './Post';
 
 

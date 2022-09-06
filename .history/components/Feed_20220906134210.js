@@ -1,24 +1,19 @@
 import { SparklesIcon } from '@heroicons/react/outline'
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import Input from '../components/Input';
-
+import { db } from '../firebase';
 import Post from './Post';
 
 
 export default function Feed() {
-  const [posts, setPosts] = useState([]);
-  useEffect(
-    () =>
-      onSnapshot(
-        query(collection(db, "posts"), orderBy("timestamp", "desc")),
-        (snapshot) => {
-          setPosts(snapshot.docs);
-        }
-      ),
-    []
-  );
+  const [posts, setPosts] = useState([])
+  useEffect(() => {
+    {/*getting the inforamtion from firebase with snapshot*/}
+    const unsubscribe = onSnapshot=(query(collection(db, "posts")), orderBy("timestamp", "desc"))
+    
+  }, [])
+ 
   return (
     <div className="xl:ml-[370px] border-l border-r border-gray-200  xl:min-w-[576px] sm:ml-[73px] flex-grow max-w-xl"> 
        {/* div is covering the header section taht has an edge to tag  */}
