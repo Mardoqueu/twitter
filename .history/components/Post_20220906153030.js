@@ -1,7 +1,7 @@
 import { ChartBarIcon, ChatIcon, DotsHorizontalIcon, HeartIcon, TrashIcon } from "@heroicons/react/outline";
 import { ShareIcon } from "@heroicons/react/solid";
 import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { db } from "../firebase";
@@ -38,7 +38,6 @@ export default function Post({post}) {
             });
           }
         } else {
-            {/*if the user is not singin, the user will be redirect to signin page*/}
           signIn();
         }
       }

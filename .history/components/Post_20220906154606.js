@@ -38,7 +38,6 @@ export default function Post({post}) {
             });
           }
         } else {
-            {/*if the user is not singin, the user will be redirect to signin page*/}
           signIn();
         }
       }

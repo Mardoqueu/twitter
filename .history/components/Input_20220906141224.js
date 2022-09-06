@@ -14,8 +14,6 @@ import {
   import { useSession, signOut } from "next-auth/react";
   import { useState, useRef } from "react";
   import { db, storage } from "../firebase";
-
-
 export default function Input() {
     const { data: session } = useSession();
     {/*creating a state*/}
@@ -33,9 +31,10 @@ export default function Input() {
 
         {/*check if the loading is true */}  
         if(loading) return;
+
+
         {/*set the loading to true */}     
         setLoading(true);
-        
 
         const docRef = await addDoc(collection(db, "posts"), {
             id: session.user.uid,
@@ -46,7 +45,7 @@ export default function Input() {
             username: session.user.username,
         });
 
-        const imageRef = ref(storage, `posts/${docRef.id}/image`);
+        const imageRef = ref(storage, 'posts/${docRef.id}/image');
 
         if(selectedFile){
             await uploadString(imageRef, selectedFile, "data_url").then(async () => {
@@ -111,7 +110,7 @@ export default function Input() {
                         <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
                         <input type="file" hidden ref={filePickerRef} onChange={addImageToPost}></input>
                     </div>
-                    <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
+                    <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-500"/>
                 </div>
                 <button
                     onClick={sendPost}

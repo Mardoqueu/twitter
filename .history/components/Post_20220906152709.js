@@ -1,7 +1,7 @@
 import { ChartBarIcon, ChatIcon, DotsHorizontalIcon, HeartIcon, TrashIcon } from "@heroicons/react/outline";
 import { ShareIcon } from "@heroicons/react/solid";
-import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
-import { signIn, useSession } from "next-auth/react";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { db } from "../firebase";
@@ -27,20 +27,15 @@ export default function Post({post}) {
       }, [likes]);
     
       async function likePost() {
-        if (session) {
-            {/*Check if there's a like, if there's like it may remove with deleteDoc,*/}
+      
           if (hasLiked) {
             await deleteDoc(doc(db, "posts", post.id, "likes", session?.user.uid));
           } else {
-            {/*Set like*/}
             await setDoc(doc(db, "posts", post.id, "likes", session?.user.uid), {
               username: session.user.username,
             });
           }
-        } else {
-            {/*if the user is not singin, the user will be redirect to signin page*/}
-          signIn();
-        }
+
       }
 
   return (
@@ -82,7 +77,7 @@ export default function Post({post}) {
                 <TrashIcon className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"/>
                 
                 {/*If there's any like, the heart will be filled, otherise it will be empty*/}
-            <div className="flex items-center">
+                <div className="flex items-center">
             {hasLiked ? (
               <HeartIconFilled
                 onClick={likePost}
@@ -98,7 +93,6 @@ export default function Post({post}) {
               <span
                 className={`${hasLiked && "text-red-600"} text-sm select-none`}
               >
-                {/*number of likes*/}
                 {" "}
                 {likes.length}
               </span>

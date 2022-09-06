@@ -111,7 +111,7 @@ export default function Input() {
                         <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
                         <input type="file" hidden ref={filePickerRef} onChange={addImageToPost}></input>
                     </div>
-                    <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
+                    <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-500"/>
                 </div>
                 <button
                     onClick={sendPost}
