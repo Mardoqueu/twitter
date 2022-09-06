@@ -10,10 +10,7 @@ export default function Input() {
     <>
     {session && (
         <div className="flex border-b border-gray-200 p-3 space-x-3">
-        {/*takes the user image from google singin*/}
-        <img
-        onClick={signOut}
-        src={`${session.user.image}`}
+        <img src={session.user.image}
         alt="user-img" 
         className="h-11 w-11 rounded-full cursor-pointer hover:brightness-95"/>
         <div className="w-full divide-y divide-gray-200">

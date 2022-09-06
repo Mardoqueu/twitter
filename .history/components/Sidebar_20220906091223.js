@@ -42,14 +42,14 @@ export default function Sidebar() {
             <button className="bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Twitte</button>
 
 {/* Mini-profile */}
-<div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
+<div className="hoverEffect text-gray-700 truncate flex items-center justify-center xl:justify-start mt-auto">
     <img 
     onClick={signOut}
-    src={session.user.image}
+    src={`${session.user.image}`}
     alt="user-img"
     className="h-10 w-10 rounded-full"/>
     <div className="leading-5 hidden xl:inline">
-        <h4 className="font-bold">{session.user.name}</h4>
+        <h4 className="font-bold truncate">{session.user.name}</h4>
         <p className="text-gray-500">@{session.user.username}</p>
     </div>
     <DotsHorizontalIcon className="h-5 xl:ml-8"/>

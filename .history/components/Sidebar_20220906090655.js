@@ -44,8 +44,7 @@ export default function Sidebar() {
 {/* Mini-profile */}
 <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
     <img 
-    onClick={signOut}
-    src={session.user.image}
+    src="https://media-exp1.licdn.com/dms/image/C4E03AQF1Icbg9ibKSQ/profile-displayphoto-shrink_800_800/0/1656524327808?e=1667433600&v=beta&t=zLj1VuO7UnlyGXgtGnCIGGm6Xel0rldXOa9ES50GV3c" 
     alt="user-img"
     className="h-10 w-10 rounded-full"/>
     <div className="leading-5 hidden xl:inline">

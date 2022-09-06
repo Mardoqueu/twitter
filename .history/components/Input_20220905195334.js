@@ -13,7 +13,7 @@ export default function Input() {
         {/*takes the user image from google singin*/}
         <img
         onClick={signOut}
-        src={`${session.user.image}`}
+        src={session.user.image}
         alt="user-img" 
         className="h-11 w-11 rounded-full cursor-pointer hover:brightness-95"/>
         <div className="w-full divide-y divide-gray-200">
