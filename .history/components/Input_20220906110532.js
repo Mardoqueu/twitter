@@ -91,13 +91,11 @@ export default function Input() {
                     onClick={()=> setSelectedFile(null)} 
                     className="h-7  text-white absolute cursor-pointer shadow-md shadow-white rounded-full"/>
                     {/*Loading animation while is uploading the file*/}
-                    <img src={selectedFile} className={`${loading && "animate-pulse"}`}></img>
+                    <img src={selectedFile} className={`${loading && "animate-spin"}`}></img>
                 </div>
             )}
             <div className="flex items-center justify-between pt-2.5">
-                {!loading && (
-                    <>
-                    <div className=" flex">
+                <div className=" flex">
                     <div className="" onClick={() => filePickerRef.current.click()}>
                         <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
                         <input type="file" hidden ref={filePickerRef} onChange={addImageToPost}></input>
@@ -109,10 +107,7 @@ export default function Input() {
                     disabled={!input}
                     className="bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50"
                   >                    Tweet
-                    </button>    
-                    </>
-                )}
-        
+                    </button>            
             </div>
         </div>
     </div>

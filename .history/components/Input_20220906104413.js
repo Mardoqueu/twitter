@@ -1,5 +1,4 @@
 import { EmojiHappyIcon, PhotographIcon } from "@heroicons/react/outline";
-import { XIcon } from "@heroicons/react/solid";
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
 import { useSession, signOut } from "next-auth/react";
@@ -13,21 +12,11 @@ export default function Input() {
 
     const [selectedFile, setSelectedFile] = useState(null);
     
-    const [loading, setLoading] = useState(false);
-
     {/*select file */}  
     const filePickerRef = useRef()
     
     {/*function is async what it means it will wait for data, cause Data will gives the promise*/}
     const sendPost = async () => {
-
-        {/*check if the loading is true */}  
-        if(loading) return;
-
-
-        {/*set the loading to true */}     
-        setLoading(true);
-
         const docRef = await addDoc(collection(db, "posts"), {
             id: session.user.uid,
             text: input,
@@ -39,9 +28,9 @@ export default function Input() {
 
         const imageRef = ref(storage, 'posts/${docRef.id}/image');
 
-        if(selectedFile){
+        if(setSelectedFile){
             await uploadString(imageRef, selectedFile, "data_url").then(async () => {
-                const downloadURL = await getDownloadURL(imageRef)
+                const downloadURL = await getDownloadURL(imageRef, selectedFile)
                 await updateDoc(doc(db, "posts", docRef.id), {
                     image: downloadURL,
                 })
@@ -49,8 +38,6 @@ export default function Input() {
         }
 
         setInput("");
-        setSelectedFile(null);
-        setLoading(false);
     };
 
     const addImageToPost = (e) => {
@@ -85,22 +72,11 @@ export default function Input() {
                 ></textarea>
             
             </div>
-            {selectedFile && (
-                <div className="relative">
-                    <XIcon 
-                    onClick={()=> setSelectedFile(null)} 
-                    className="h-7  text-white absolute cursor-pointer shadow-md shadow-white rounded-full"/>
-                    {/*Loading animation while is uploading the file*/}
-                    <img src={selectedFile} className={`${loading && "animate-pulse"}`}></img>
-                </div>
-            )}
             <div className="flex items-center justify-between pt-2.5">
-                {!loading && (
-                    <>
-                    <div className=" flex">
+                <div className=" flex">
                     <div className="" onClick={() => filePickerRef.current.click()}>
                         <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100"/>
-                        <input type="file" hidden ref={filePickerRef} onChange={addImageToPost}></input>
+                        <input type="file" hidden ref={filePickerRef} onClick={addImageToPost}></input>
                     </div>
                     <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-500"/>
                 </div>
@@ -109,10 +85,7 @@ export default function Input() {
                     disabled={!input}
                     className="bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50"
                   >                    Tweet
-                    </button>    
-                    </>
-                )}
-        
+                    </button>            
             </div>
         </div>
     </div>
