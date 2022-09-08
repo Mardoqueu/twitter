@@ -13,7 +13,7 @@ export default function Post({post}) {
     const { data: session } = useSession();
     const [likes, setLikes] = useState([]);
     const [hasLiked, setHasLiked] = useState(false);
-    const [open, setOpen] = useRecoilState(modalState);
+    const [open, setOpen] = useRecoilState(modalState)
     
     {/*useEffect to get the information about the number of likes*/}
     useEffect(() => {
@@ -90,7 +90,7 @@ export default function Post({post}) {
             
             {/* icons */}
             <div className="flex justify-between text-gray-500">
-                <ChatIcon onClick={() => setOpen(!open)} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
+                <ChatIcon onClick={{} => } className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
                 
             {/* Check if the user is the owner of the post */}
             {session?.user.uid === post?.data().id && (
