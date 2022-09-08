@@ -15,35 +15,6 @@ export default function Post({post}) {
     const [hasLiked, setHasLiked] = useState(false);
     const [open, setOpen] = useRecoilState(modalState);
     const [postId, setPostId] = useRecoilState(postIdState);
-    const [comments, setComments] = useState([]);
-    const [hasComments, setHasComments] = useState(false);
-
-    useEffect(() => {
-      const unsubscribe = onSnapshot(
-        collection(db, "posts", post.id, "comments"),
-        (snapshot) => setComments(snapshot.docs)
-      );
-    }, [db]);
-
-    useEffect(() => {
-      setHasComments(
-        comments.findIndex((comments) => comments.id === session?.user.uid) !== -1
-      );
-    }, [comments]);
-
-    async function commentPost() {
-      if (session) {
-        if (hasComments) {
-          await deleteDoc(doc(db, "posts", post.id, "comments", session?.user.uid));
-        } else {
-          await setDoc(doc(db, "posts", post.id, "comments", session?.user.uid), {
-            username: session.user.username,
-          });
-        }
-      } else {
-        signIn();
-      }
-    }
 
     {/*useEffect to get the information about the number of likes*/}
     useEffect(() => {
@@ -119,10 +90,7 @@ export default function Post({post}) {
             <img className="rounded-2xl mr-2" src={`${post.data().image}`} alt=""></img>
             
             {/* icons */}
-    
-
             <div className="flex justify-between text-gray-500">
-               <div className="flex items-center select-none">
                 <ChatIcon 
                 onClick={() => {
                   if(!session){
@@ -133,15 +101,7 @@ export default function Post({post}) {
                   }
                 }} 
                 className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
-              {comments.length > 0 && 
-              <span
-                className={`${hasComments && "text-red-600"} text-sm select-none`}
-              >
-                {/*number of likes*/}
-                {comments.length}
-              </span>
-            }
-                </div>
+                
             {/* Check if the user is the owner of the post */}
             {session?.user.uid === post?.data().id && (
             <TrashIcon

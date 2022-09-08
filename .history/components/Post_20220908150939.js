@@ -122,7 +122,6 @@ export default function Post({post}) {
     
 
             <div className="flex justify-between text-gray-500">
-               <div className="flex items-center select-none">
                 <ChatIcon 
                 onClick={() => {
                   if(!session){
@@ -132,16 +131,17 @@ export default function Post({post}) {
                     setOpen(!open);
                   }
                 }} 
-                className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
-              {comments.length > 0 && 
+                className="flex justify-between"/>
+              {comments.length > 0 && (
               <span
                 className={`${hasComments && "text-red-600"} text-sm select-none`}
               >
                 {/*number of likes*/}
+                {" "}
                 {comments.length}
               </span>
-            }
-                </div>
+            )}
+                
             {/* Check if the user is the owner of the post */}
             {session?.user.uid === post?.data().id && (
             <TrashIcon

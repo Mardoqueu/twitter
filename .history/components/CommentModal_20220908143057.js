@@ -8,17 +8,16 @@ import {
 } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { addDoc, collection, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
+import { addDoc, doc, onSnapshot } from "firebase/firestore";
 import Moment from "react-moment";
 import { useSession } from "next-auth/react";
-import {useRouter} from "next/router"
 export default function CommentModal() {
   const [open, setOpen] = useRecoilState(modalState);
   const [postId] = useRecoilState(postIdState);
   const [post, setPost] = useState({});
   const [input, setInput] = useState("");
   const { data: session } = useSession();
-  const router = useRouter();
+
   useEffect(() => {
     onSnapshot(doc(db, "posts", postId), (snapshot) => {
       setPost(snapshot);
@@ -32,12 +31,8 @@ export default function CommentModal() {
             comment: input,
             name: session.user.name,
             username: session.user.username,
-            userImg: session.user.image,
-            timestamp: serverTimestamp()
+            userImg: session.user.userImg,
         });
-        setOpen(false);
-        setInput("");
-        router.push(`posts/${postId}`);
   }
 
   return (

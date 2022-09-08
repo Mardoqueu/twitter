@@ -122,7 +122,7 @@ export default function Post({post}) {
     
 
             <div className="flex justify-between text-gray-500">
-               <div className="flex items-center select-none">
+               <div className="">
                 <ChatIcon 
                 onClick={() => {
                   if(!session){

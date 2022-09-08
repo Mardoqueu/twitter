@@ -11,7 +11,7 @@ import { db } from "../firebase";
 import { addDoc, collection, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import Moment from "react-moment";
 import { useSession } from "next-auth/react";
-import {useRouter} from "next/router"
+import {useRouter} from "react-router";
 export default function CommentModal() {
   const [open, setOpen] = useRecoilState(modalState);
   const [postId] = useRecoilState(postIdState);
