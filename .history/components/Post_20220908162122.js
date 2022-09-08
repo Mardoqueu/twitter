@@ -110,7 +110,7 @@ export default function Post({post, id}) {
                     
                     <span className="text-sm sm:text-[15px] hover:underline">   
                         {/* Moment to show the time that post was created */}      
-                        <Moment fromNow>{post?.data()?.timestamp?.toDate()}</Moment>
+                        <Moment fromNow>{post?.data().timestamp?.toDate()}</Moment>
                     </span>
                 </div>
                 {/* dot icon */}
@@ -118,10 +118,10 @@ export default function Post({post, id}) {
 
             </div>
             {/* post text */}
-            <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">{post?.data()?.text}</p>
+            <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">{post?.data().text}</p>
 
             {/* post image */}
-            <img className="rounded-2xl mr-2" src={`${post?.data()?.image}`} alt=""></img>
+            <img className="rounded-2xl mr-2" src={`${post?.data().image}`} alt=""></img>
             
             {/* icons */}
     
@@ -148,7 +148,7 @@ export default function Post({post, id}) {
             }
                 </div>
             {/* Check if the user is the owner of the post */}
-            {session?.user.uid === post?.data()?.id && (
+            {session?.user.uid === post?.data().id && (
             <TrashIcon
               onClick={deletePost}
               className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"

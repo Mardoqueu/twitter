@@ -44,7 +44,7 @@ const [randomUserNumber, setRandomUserNumber] = useState(3);
               
               {/*Animation/transition*/}
               <AnimatePresence>
-              {randomUserResults?.slice(0,randomUserNumber).map((randomUser)=> (
+              {randomUserResults.slice(0,randomUserNumber).map((randomUser)=> (
                   <motion.div 
                   key={randomUserNumber.id} 
                   initial={{opacity: 0}} 

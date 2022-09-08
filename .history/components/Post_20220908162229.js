@@ -110,7 +110,7 @@ export default function Post({post, id}) {
                     
                     <span className="text-sm sm:text-[15px] hover:underline">   
                         {/* Moment to show the time that post was created */}      
-                        <Moment fromNow>{post?.data()?.timestamp?.toDate()}</Moment>
+                        <Moment fromNow>{post?.data().timestamp?.toDate()}</Moment>
                     </span>
                 </div>
                 {/* dot icon */}

@@ -6,9 +6,9 @@ import News from "./News";
 export default function Widgets({newsResults, randomUserResults}) {
 
 {/*variable to show more news each time the user click on show more */}
-const [articleNum, setArticleNum] = useState(3);
+const [articleNum, setArticleNum] = useState(5);
 {/*variable to show more news each time the user click on show more */}
-const [randomUserNumber, setRandomUserNumber] = useState(3);
+const [randomUserNumber, setRandomUserNumber] = useState(5);
   return (
     <div className="xl:w-[600px] hidden lg:inline ml-8 space-y-5">
         <div className="w-[90%] xl:w-[75%] sticky top-0 bg-white py-1.5 z-50">            
@@ -22,7 +22,7 @@ const [randomUserNumber, setRandomUserNumber] = useState(3);
             <h4 className="font-bold text-xl px-4">What's happening</h4>
             {/*Animation/transition*/}
             <AnimatePresence>
-            {newsResults.slice(0,articleNum).map((article)=> (
+            {newsResults.slice(0,articlNum).map((article)=> (
               <motion.div  
               key={article.title} 
               initial={{opacity: 0}} 
@@ -37,14 +37,14 @@ const [randomUserNumber, setRandomUserNumber] = useState(3);
   
 
         {/*Show more 3 news each time click on show more */}
-        <button onClick={() => setArticleNum(articleNum + 3)} className="text-blue-300 pl-4 pb-3 hover:text-blue-400">Show more</button>
+        <button onClick={() => setArticleNum(articlNum + 3)} className="text-blue-300 pl-4 pb-3 hover:text-blue-400">Show more</button>
         </div>
         <div className="sticky top-16 text-gray-700 space-y-3 bg-gray-100 rounded-xl pt-2 w-[90%] xl:w-[75%]">
               <h4 className="font-bold text-xl px-4">Who to follow</h4>
               
               {/*Animation/transition*/}
               <AnimatePresence>
-              {randomUserResults?.slice(0,randomUserNumber).map((randomUser)=> (
+              {randomUserResults.slice(0,randomUserNumber).map((randomUser)=> (
                   <motion.div 
                   key={randomUserNumber.id} 
                   initial={{opacity: 0}} 

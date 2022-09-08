@@ -6,9 +6,9 @@ import News from "./News";
 export default function Widgets({newsResults, randomUserResults}) {
 
 {/*variable to show more news each time the user click on show more */}
-const [articleNum, setArticleNum] = useState(3);
+const [articleNum, setArticleNum] = useState(5);
 {/*variable to show more news each time the user click on show more */}
-const [randomUserNumber, setRandomUserNumber] = useState(3);
+const [randomUserNumber, setRandomUserNumber] = useState(5);
   return (
     <div className="xl:w-[600px] hidden lg:inline ml-8 space-y-5">
         <div className="w-[90%] xl:w-[75%] sticky top-0 bg-white py-1.5 z-50">            
@@ -44,7 +44,7 @@ const [randomUserNumber, setRandomUserNumber] = useState(3);
               
               {/*Animation/transition*/}
               <AnimatePresence>
-              {randomUserResults?.slice(0,randomUserNumber).map((randomUser)=> (
+              {randomUserResults.slice(0,randomUserNumber).map((randomUser)=> (
                   <motion.div 
                   key={randomUserNumber.id} 
                   initial={{opacity: 0}} 
