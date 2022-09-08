@@ -47,8 +47,8 @@ export default function CommentModal() {
               <span className="w-0.5 h-full z-[-1] absolute left-8 top-11 bg-gray-300" />
               <img
                 className="h-11 w-11 rounded-full mr-4"
-                src={`${post?.data()?.UserImg}`}
-                 alt="user-img"
+                src={`${post?.data()?.userImg}`}
+                alt="user-img"
               />
               <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">
                 {post?.data()?.name}
@@ -66,7 +66,7 @@ export default function CommentModal() {
 
             <div className="flex  p-3 space-x-3">
               <img
-                src={`${session.user.image}`}
+                src={session.user.image}
                 alt="user-img"
                 className="h-11 w-11 rounded-full cursor-pointer hover:brightness-95"
               />

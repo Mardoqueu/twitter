@@ -93,12 +93,8 @@ export default function Post({post}) {
             <div className="flex justify-between text-gray-500">
                 <ChatIcon 
                 onClick={() => {
-                  if(!session){
-                    signIn();
-                  }else{
-                    setPostId(post.id)
-                    setOpen(!open);
-                  }
+                  setPostId(post.id)
+                  setOpen(!open);
                 }} 
                 className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
                 

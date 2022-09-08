@@ -99,6 +99,7 @@ export default function Post({post}) {
                     setPostId(post.id)
                     setOpen(!open);
                   }
+
                 }} 
                 className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"/>
                 
