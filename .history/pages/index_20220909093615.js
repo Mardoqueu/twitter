@@ -21,8 +21,10 @@ export default function Home({newsResults, randomUserResults}) {
       {/* Feed */}
       <Feed/>
       {/* Widgets */}
-      <Widgets 
-      newsResults={newsResults.articles}  randomUserResults={randomUserResults.results}/>
+      <Widgets
+          newsResults={newsResults?.articles}
+          randomUsersResults={randomUserResults?.results || null}
+        />
       {/* Modal */}
       <CommentModal/>
 
@@ -36,14 +38,21 @@ export default function Home({newsResults, randomUserResults}) {
 //https://saurav.tech/NewsAPI/top-headlines/category/business/us.json
 
 export async function getServerSideProps(){
-  const newsResults = await fetch (
-    "https://saurav.tech/NewsAPI/top-headlines/category/science/us.json"
-    ).then((res) => res.json());
+  let randomUsersResults = [];
 
-    //Who to follow section
+  try {
+    const res = await fetch(
+      "https://randomuser.me/api/?results=30&inc=name,login,picture"
+    );
 
-    const randomUserResults = await fetch("https://randomuser.me/api/?results=30&inc=name,login,picture"
-    ).then((res) => res.json());
+    randomUsersResults = await res.json();
+  } catch (e) {
+    randomUsersResults = [];
+  }
+
+  // const randomUsersResults = await fetch(
+  //   "https://randomuser.me/api/?results=30&inc=name,login,picture"
+  // ).then((res) => res.json());
 
   return {
     props: {

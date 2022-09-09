@@ -12,24 +12,16 @@ import { modalState, postIdState } from "../atom/modalAtom";
 import { useRouter } from "next/router";
 
 
-export default function Post({post, id}) {
+export default function Comment({comment, commentId, originalPostId}) {
     const { data: session } = useSession();
     const [likes, setLikes] = useState([]);
     const [hasLiked, setHasLiked] = useState(false);
     const [open, setOpen] = useRecoilState(modalState);
     const [postId, setPostId] = useRecoilState(postIdState);
-    const [comments, setComments] = useState([]);
     const [hasComments, setHasComments] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-      const unsubscribe = onSnapshot(
-        collection(db, "posts", id, "comments"),
-        (snapshot) => setComments(snapshot.docs)
-      );
-    }, [db]);
 
-    {/*check if the user id exists inside the likes*/}
     useEffect(() => {
       setHasComments(
         comments.findIndex((comments) => comments.id === session?.user.uid) !== -1
@@ -53,25 +45,35 @@ export default function Post({post, id}) {
     {/*useEffect to get the information about the number of likes*/}
     useEffect(() => {
         const unsubscribe = onSnapshot(
-          collection(db, "posts", id, "likes"),
+          collection(db, "posts", originalPostId, "comments", commentId,"likes"),
           (snapshot) => setLikes(snapshot.docs)
         );
-      }, [db]);
+      }, [db, originalPostId, commentId]);
+
     
+     {/*check if the user id exists inside the likes*/}
       useEffect(() => {
         setHasLiked(
           likes.findIndex((like) => like.id === session?.user.uid) !== -1
         );
       }, [likes]);
     
-      async function likePost() {
+      async function likeComment() {
         if (session) {
             {/*Check if there's a like, if there's like it may remove with deleteDoc,*/}
           if (hasLiked) {
-            await deleteDoc(doc(db, "posts", id, "likes", session?.user.uid));
+            await deleteDoc(
+              doc(
+                db, 
+                "posts", 
+                originalPostId, 
+                "comments", 
+                commentId,
+                "likes", 
+                session?.user.uid));
           } else {
             {/*Set like*/}
-            await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
+            await setDoc(doc(db, "posts", originalPostId, "comments", commentId,"likes", session?.user.uid), {
               username: session.user.username,
             });
           }
@@ -82,13 +84,9 @@ export default function Post({post, id}) {
       }
 
       {/* delete functionality */}
-      async function deletePost() {
-        if (window.confirm("Are you sure you want to delete this post?")) {
-          deleteDoc(doc(db, "posts", id));
-          if(post.data().image){
-            deleteObject(ref(storage, `posts/${id}/image`));
-          }
-          router.push("/");
+      async function deleteComment() {
+        if (window.confirm("Are you sure you want to delete this comment?")) {
+          deleteDoc(doc(db, "posts", originalPostId, "comments", commentId));
         }
       }
   return (
@@ -96,7 +94,7 @@ export default function Post({post, id}) {
         {/* user image */}
         <img 
         className="h-11 w-11 mr-4 rounded-full " 
-        src={`${post?.data()?.UserImg}`} 
+        src={`${comment?.UserImg}`} 
         alt="user-img"></img>
 
         {/* right side */}
@@ -119,17 +117,11 @@ export default function Post({post, id}) {
 
             </div>
             {/* post text */}
-            <p  onClick={() => router.push(`/posts/${id}`)} 
-            className="text-gray-800 text-[15px sm:text-[16px] mb-2">
-              {post?.data()?.text}</p>
+            <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">{post?.data()?.text}</p>
 
             {/* post image */}
-            <img
-                onClick={() => router.push(`/posts/${id}`)}
-                className="rounded-2xl mr-2"
-                src={post?.data()?.image}
-                alt=""
-              />            
+            <img className="rounded-2xl mr-2" src={`${post?.data()?.image}`} alt=""></img>
+            
             {/* icons */}
     
 

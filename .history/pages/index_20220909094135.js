@@ -21,8 +21,10 @@ export default function Home({newsResults, randomUserResults}) {
       {/* Feed */}
       <Feed/>
       {/* Widgets */}
-      <Widgets 
-      newsResults={newsResults.articles}  randomUserResults={randomUserResults.results}/>
+      <Widgets
+          newsResults={newsResults?.articles}
+          randomUsersResults={randomUserResults?.results || null}
+        />
       {/* Modal */}
       <CommentModal/>
 

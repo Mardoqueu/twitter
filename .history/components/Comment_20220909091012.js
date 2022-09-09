@@ -12,24 +12,16 @@ import { modalState, postIdState } from "../atom/modalAtom";
 import { useRouter } from "next/router";
 
 
-export default function Post({post, id}) {
+export default function Comment({comment, commentId, originalPostId}) {
     const { data: session } = useSession();
     const [likes, setLikes] = useState([]);
     const [hasLiked, setHasLiked] = useState(false);
     const [open, setOpen] = useRecoilState(modalState);
     const [postId, setPostId] = useRecoilState(postIdState);
-    const [comments, setComments] = useState([]);
     const [hasComments, setHasComments] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-      const unsubscribe = onSnapshot(
-        collection(db, "posts", id, "comments"),
-        (snapshot) => setComments(snapshot.docs)
-      );
-    }, [db]);
 
-    {/*check if the user id exists inside the likes*/}
     useEffect(() => {
       setHasComments(
         comments.findIndex((comments) => comments.id === session?.user.uid) !== -1
@@ -53,11 +45,13 @@ export default function Post({post, id}) {
     {/*useEffect to get the information about the number of likes*/}
     useEffect(() => {
         const unsubscribe = onSnapshot(
-          collection(db, "posts", id, "likes"),
+          collection(db, "posts", originalPostId, "comments", commentId,"likes"),
           (snapshot) => setLikes(snapshot.docs)
         );
-      }, [db]);
+      }, [db, originalPostId, commentId]);
+
     
+     {/*check if the user id exists inside the likes*/}
       useEffect(() => {
         setHasLiked(
           likes.findIndex((like) => like.id === session?.user.uid) !== -1
@@ -119,17 +113,11 @@ export default function Post({post, id}) {
 
             </div>
             {/* post text */}
-            <p  onClick={() => router.push(`/posts/${id}`)} 
-            className="text-gray-800 text-[15px sm:text-[16px] mb-2">
-              {post?.data()?.text}</p>
+            <p className="text-gray-800 text-[15px sm:text-[16px] mb-2 ">{post?.data()?.text}</p>
 
             {/* post image */}
-            <img
-                onClick={() => router.push(`/posts/${id}`)}
-                className="rounded-2xl mr-2"
-                src={post?.data()?.image}
-                alt=""
-              />            
+            <img className="rounded-2xl mr-2" src={`${post?.data()?.image}`} alt=""></img>
+            
             {/* icons */}
     
 
