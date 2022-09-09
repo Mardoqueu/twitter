@@ -87,7 +87,6 @@ export default function PostPage({ newsResults, randomUsersResults }) {
 
         {/* Widgets */}
 
-
         <Widgets
           newsResults={newsResults.articles}
           randomUsersResults={randomUsersResults.results}

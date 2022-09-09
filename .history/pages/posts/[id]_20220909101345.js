@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 import Comment from "../../components/Comment";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 export default function PostPage({ newsResults, randomUsersResults }) {
   const router = useRouter();
@@ -61,7 +61,7 @@ export default function PostPage({ newsResults, randomUsersResults }) {
                 <div className="">
                 <AnimatePresence>
                 {comments.map((comment) => (
-                       <motion.div key={comment.id} 
+                       <motion.div key={post.id} 
                        initial={{opacity: 0}} 
                        animate={{opacity: 1}} 
                        exit={{opacity: 0}}
@@ -86,7 +86,6 @@ export default function PostPage({ newsResults, randomUsersResults }) {
         </div>
 
         {/* Widgets */}
-
 
         <Widgets
           newsResults={newsResults.articles}
