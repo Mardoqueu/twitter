@@ -1,5 +1,24 @@
 
 
+💻 Style with Tailwind CSS
+
+💻 Authenticate using next-auth
+
+💻 Firebase for database and storage
+
+💻 Apply like, comment, delete functionality
+
+💻 Add upload functionality and use Image tag of nextjs
+
+💻 API's: Google Sign-In, Saurav, Randomuser.me
+
+💻 About: Twitter clone using nextJS and tailwind CSS
+
+
+![portfolio4](https://user-images.githubusercontent.com/11077068/197517237-c1c75774-75c6-4ede-9fa1-c0556f0a16c1.png)
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
